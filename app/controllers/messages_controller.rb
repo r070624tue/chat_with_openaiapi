@@ -11,6 +11,7 @@ class MessagesController < ApplicationController
     response_body = JSON.parse(response.body)
     @message.response = response_body['choices'][0]['message']['content']
     @message.save
+    render json: { response: @message.response }
   end
 
   private
