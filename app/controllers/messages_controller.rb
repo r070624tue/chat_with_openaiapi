@@ -9,6 +9,8 @@ class MessagesController < ApplicationController
     @message = Message.new(message_params)
     response = openai_api_call(@message.prompt)
     response_body = JSON.parse(response.body)
+    @message.response = response_body['choices'][0]['message']['content']
+    @message.save
   end
 
   private
