@@ -1,3 +1,8 @@
+<div id="chat-container">
+  <div id="messages-list">
+  </div>
+</div>
+
 <%= form_with(model: @message, id: 'generation-form') do |form| %>
   <div class="textarea-with-submit-inside">
     <%= form.text_area :prompt, class: "rounded-corners" %>
