@@ -41,7 +41,8 @@ document.addEventListener('DOMContentLoaded', () => {
     })
     .then(data => {
       displayResponse(data.response, targetElement);
-    });
+    })
+    .catch(error => handleAPIError(error, targetElement));
   }
 
   // 各要素を取得
