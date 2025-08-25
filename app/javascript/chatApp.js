@@ -208,10 +208,10 @@ document.addEventListener('DOMContentLoaded', () => {
       </div>
      <form id="generation-form" action="/chat_threads/${chatThread.id}/messages" method="post" accept-charset="UTF-8">
       <div class="textarea-with-submit-inside">
-    　　　<textarea name="message[prompt]" class="rounded-corners" id="message_prompt"></textarea>
-    　　　<input type="submit" value="↑" class="submit-within-textarea rounded-corners" data-disable-with="↑">
-  　　　</div>
-　　　</form>
+        <textarea name="message[prompt]" class="rounded-corners" id="message_prompt"></textarea>
+        <input type="submit" value="↑" class="submit-within-textarea rounded-corners" data-disable-with="↑">
+      </div>
+     </form>
 
       <div id="threads-modal">
       <div id="threads-modal-content">
@@ -224,7 +224,7 @@ document.addEventListener('DOMContentLoaded', () => {
     
     document.body.insertAdjacentHTML('afterbegin', newHtml);
     form = document.getElementById('generation-form');
-　　 messagesList = document.getElementById('messages-list');
+    messagesList = document.getElementById('messages-list');
     threadsList = document.getElementById('threads-list');
 
     
