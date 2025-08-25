@@ -1,6 +1,7 @@
 document.addEventListener('DOMContentLoaded', () => {
   let form = document.getElementById('generation-form');
   let messagesList = document.getElementById('messages-list');
+  let newThreadBtn = document.getElementById('new-thread-btn');
 
   function handleFormSubmit(e) {
     e.preventDefault();
@@ -45,6 +46,17 @@ document.addEventListener('DOMContentLoaded', () => {
     .catch(error => handleAPIError(error, targetElement));
   }
 
+  function createNewThread() {
+    fetch('/chat_threads', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+        'Accept': 'application/json',
+        'X-CSRF-Token': document.querySelector('meta[name="csrf-token"]').content
+      }
+    })
+  }
+  
   // 各要素を取得
   let threadTitle = document.getElementById('thread-title');
   let chatContainer = document.getElementById('chat-container');
