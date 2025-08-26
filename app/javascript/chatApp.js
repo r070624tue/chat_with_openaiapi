@@ -3,6 +3,7 @@ document.addEventListener('DOMContentLoaded', () => {
   let messagesList = document.getElementById('messages-list');
   let newThreadBtn = document.getElementById('new-thread-btn');
   let showThreadBtn = document.getElementById('show-thread-btn');
+  let threadsList = document.getElementById('threads-list');
 
   function handleFormSubmit(e) {
     e.preventDefault();
@@ -67,7 +68,13 @@ document.addEventListener('DOMContentLoaded', () => {
     })
     .then(response => response.json())
     .then(data => {
-      console.log(data);
+      threadsList.innerHTML = '';
+      data.chat_threads.forEach(chatThread => {
+        const threadItem = document.createElement('div');
+        threadItem.classList.add('thread-item');
+        threadItem.textContent = chatThread.title;
+        threadsList.appendChild(threadItem);
+      });
     });
   }
   
