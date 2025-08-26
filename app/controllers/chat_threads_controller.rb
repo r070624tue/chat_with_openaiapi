@@ -1,5 +1,5 @@
 class ChatThreadsController < ApplicationController
   def create
-    binding.pry
+    @chat_thread = ChatThread.create(title: 'Untitled')
   end
 end
