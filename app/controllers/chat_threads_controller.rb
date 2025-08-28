@@ -1,7 +1,11 @@
 class ChatThreadsController < ApplicationController
   def index
     @chat_threads = ChatThread.order(created_at: :desc)
-    render json: { chat_threads: @chat_threads }
+
+    respond_to do |format|
+      format.json { render json: { chat_threads: @chat_threads } }
+      format.html
+    end
   end
   
   def create
@@ -13,7 +17,7 @@ class ChatThreadsController < ApplicationController
 
     respond_to do |format|
       format.json { render json: { chat_thread: @chat_thread } }
-      format.html { render 'messages/index' }
+      format.html { render :index }
     end
   end
 end
