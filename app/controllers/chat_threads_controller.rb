@@ -14,6 +14,7 @@ class ChatThreadsController < ApplicationController
 
   def show
     @chat_thread = ChatThread.find(params[:id])
+    @message = @chat_thread.messages.build
 
     respond_to do |format|
       format.json { render json: { chat_thread: @chat_thread } }
