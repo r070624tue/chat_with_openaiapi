@@ -57,6 +57,16 @@ document.addEventListener('DOMContentLoaded', () => {
         'X-CSRF-Token': document.querySelector('meta[name="csrf-token"]').content
       }
     })
+    .then(response => response.json())
+    .then(data => {
+      if (data.chat_thread) {
+        history.pushState(null, '', `/chat_threads/${data.chat_thread.id}`);
+        updateChatInterface(data.chat_thread, []);
+      } else {
+        console.error('新規スレッドの作成に失敗しました', data.errors);
+      }
+    })
+    .catch(error => console.error('新規スレッドの作成に失敗しました', error));
   }
   
   function fetchChatThreads() {

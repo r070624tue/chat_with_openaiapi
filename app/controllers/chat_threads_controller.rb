@@ -10,6 +10,12 @@ class ChatThreadsController < ApplicationController
   
   def create
     @chat_thread = ChatThread.create(title: 'Untitled')
+
+    if @chat_thread.persisted?
+      render json: { chat_thread: @chat_thread }, status: :created
+    else
+      render json: { errors: @chat_thread.errors.full_messages }, status: :unprocessable_entity
+    end
   end
 
   def show
