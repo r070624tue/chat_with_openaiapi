@@ -11,7 +11,6 @@ document.addEventListener('DOMContentLoaded', () => {
     const token = document.querySelector('meta[name="csrf-token"]').content;
     const promptContent = form.querySelector('textarea').value;
     const targetElement = appendMessageElement(promptContent);
-    appendMessageElement(promptContent);
     form.reset();
     sendPrompt(formData, token, targetElement);
   }
@@ -42,6 +41,7 @@ document.addEventListener('DOMContentLoaded', () => {
       },
       body: formData
     })
+    .then(response => response.json())
     .then(data => {
       displayResponse(data.response, targetElement);
     })

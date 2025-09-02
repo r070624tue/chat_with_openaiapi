@@ -4,12 +4,13 @@ class MessagesController < ApplicationController
   def create
     @chat_thread = ChatThread.find(params[:chat_thread_id])
     @message = @chat_thread.messages.build(message_params)
-    
+
     response = openai_api_call(@message.prompt)
 
     if response.status.success?
       response_body = JSON.parse(response.body)
       @message.response = response_body['choices'][0]['message']['content']
+      
       if @message.save
         render json: { response: @message.response }
       else
