@@ -12,6 +12,7 @@ class MessagesController < ApplicationController
       @message.response = response_body['choices'][0]['message']['content']
       
       if @chat_thread.messages.count == 0
+        generate_title(@message.prompt)
       end
       
       if @message.save
@@ -43,5 +44,11 @@ class MessagesController < ApplicationController
         messages: [{ role: "user", content: prompt }]
       }
     )
+  end
+
+  def generate_title(content)
+    title_prompt = "以下の会話の開始プロンプトから、この会話スレッドの内容を予測し、5単語以内の簡潔なタイトルを生成してください。タイトルは今後の会話も含めてスレッドの内容を想像できるものにしてください。\n\nプロンプト: #{content}\n\nタイトル:"
+
+    openai_api_call(title_prompt)
   end
 end
