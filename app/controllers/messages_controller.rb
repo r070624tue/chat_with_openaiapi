@@ -11,6 +11,9 @@ class MessagesController < ApplicationController
       response_body = JSON.parse(response.body)
       @message.response = response_body['choices'][0]['message']['content']
       
+      if @chat_thread.messages.count == 0
+      end
+      
       if @message.save
         render json: { response: @message.response }
       else
