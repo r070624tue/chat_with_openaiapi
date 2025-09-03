@@ -44,6 +44,9 @@ document.addEventListener('DOMContentLoaded', () => {
     .then(response => response.json())
     .then(data => {
       displayResponse(data.response, targetElement);
+      if (data.thread_title) {
+        updateThreadTitleDisplay(data.thread_title);
+      }
     })
     .catch(error => handleAPIError(error, targetElement));
   }
