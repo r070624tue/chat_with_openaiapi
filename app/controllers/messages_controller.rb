@@ -17,7 +17,10 @@ class MessagesController < ApplicationController
       end
       
       if @message.save
-        render json: { response: @message.response }
+        render json: {
+          response: @message.response,
+          thread_title: @chat_thread.title
+        }
       else
         render json: { error: @message.errors.full_messages.join(', ') }, status: :unprocessable_entity
       end
