@@ -5,7 +5,10 @@ class MessagesController < ApplicationController
     @chat_thread = ChatThread.find(params[:chat_thread_id])
     @message = @chat_thread.messages.build(message_params)
 
-    response = openai_api_call(@message.prompt)
+    context = @chat_thread.context || ""
+    full_prompt = context + "\n" + @message.prompt
+
+    response = openai_api_call(full_prompt)
 
     if response.status.success?
       response_body = JSON.parse(response.body)
@@ -17,8 +20,7 @@ class MessagesController < ApplicationController
       end
       
       if @message.save
-        conversations = @chat_thread.context || ""
-        new_context = conversations + "\n" + @message.prompt + "\n" + @message.response
+        new_context = context + "\n" + @message.prompt + "\n" + @message.response
         @chat_thread.update(context: new_context.last(1500))
 
         render json: {
