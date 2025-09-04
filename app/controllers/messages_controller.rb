@@ -18,6 +18,7 @@ class MessagesController < ApplicationController
       
       if @message.save
         conversations = @chat_thread.context || ""
+        new_context = conversations + "\n" + @message.prompt + "\n" + @message.response
         
         render json: {
           response: @message.response,
